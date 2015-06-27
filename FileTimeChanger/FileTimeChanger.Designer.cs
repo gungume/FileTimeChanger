@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileTimeChanger));
             this.listView = new System.Windows.Forms.ListView();
-            this.FullFilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Created = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Modified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Accessed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FileName = new System.Windows.Forms.ColumnHeader();
+            this.Created = new System.Windows.Forms.ColumnHeader();
+            this.Modified = new System.Windows.Forms.ColumnHeader();
+            this.Accessed = new System.Windows.Forms.ColumnHeader();
+            this.FullFilePath = new System.Windows.Forms.ColumnHeader();
+            this.OrginalData = new System.Windows.Forms.ColumnHeader();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnChange = new System.Windows.Forms.Button();
             this.checkTime = new System.Windows.Forms.CheckBox();
@@ -41,7 +45,6 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.OrginalData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRecovery = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -52,26 +55,22 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.FullFilePath,
-            this.OrginalData,
             this.FileName,
             this.Created,
             this.Modified,
-            this.Accessed});
+            this.Accessed,
+            this.FullFilePath,
+            this.OrginalData});
             this.listView.FullRowSelect = true;
             this.listView.Location = new System.Drawing.Point(10, 10);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(625, 238);
+            this.listView.SmallImageList = this.imageList;
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView_DragDrop);
             this.listView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView_DragEnter);
-            // 
-            // FullFilePath
-            // 
-            this.FullFilePath.Text = "FullFilePath";
-            this.FullFilePath.Width = 0;
             // 
             // FileName
             // 
@@ -92,6 +91,23 @@
             // 
             this.Accessed.Text = "액세스한 날짜";
             this.Accessed.Width = 150;
+            // 
+            // FullFilePath
+            // 
+            this.FullFilePath.Text = "FullFilePath";
+            this.FullFilePath.Width = 0;
+            // 
+            // OrginalData
+            // 
+            this.OrginalData.Text = "OrginalData";
+            this.OrginalData.Width = 0;
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "File_.ico");
+            this.imageList.Images.SetKeyName(1, "Folder.ico");
             // 
             // dateTimePicker
             // 
@@ -168,11 +184,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "진행률 : ";
             // 
-            // OrginalData
-            // 
-            this.OrginalData.Text = "OrginalData";
-            this.OrginalData.Width = 0;
-            // 
             // btnRecovery
             // 
             this.btnRecovery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -199,7 +210,7 @@
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.listView);
             this.Name = "FileTimeChanger";
-            this.Text = "파일날짜 일괄변경 v0.2 (Gungume.com)";
+            this.Text = "폴더&파일날짜 일괄변경 v0.3 (Gungume.com)";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,6 +233,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ColumnHeader OrginalData;
         private System.Windows.Forms.Button btnRecovery;
+        private System.Windows.Forms.ImageList imageList;
     }
 }
 
