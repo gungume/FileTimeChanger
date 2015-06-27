@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.listView = new System.Windows.Forms.ListView();
-            this.FullFilePath = new System.Windows.Forms.ColumnHeader();
-            this.FileName = new System.Windows.Forms.ColumnHeader();
-            this.Created = new System.Windows.Forms.ColumnHeader();
-            this.Modified = new System.Windows.Forms.ColumnHeader();
-            this.Accessed = new System.Windows.Forms.ColumnHeader();
+            this.FullFilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Created = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Modified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Accessed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnChange = new System.Windows.Forms.Button();
             this.checkTime = new System.Windows.Forms.CheckBox();
@@ -41,15 +41,19 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.OrginalData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnRecovery = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView
             // 
             this.listView.AllowDrop = true;
-            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.FullFilePath,
+            this.OrginalData,
             this.FileName,
             this.Created,
             this.Modified,
@@ -91,17 +95,18 @@
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker.CustomFormat = "yyyy년 M월 d일 dddd tt h시 m분 s초";
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker.Location = new System.Drawing.Point(11, 258);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(398, 21);
+            this.dateTimePicker.Size = new System.Drawing.Size(302, 21);
             this.dateTimePicker.TabIndex = 1;
             // 
             // btnChange
             // 
-            this.btnChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChange.Location = new System.Drawing.Point(420, 258);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(105, 21);
@@ -112,9 +117,9 @@
             // 
             // checkTime
             // 
-            this.checkTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkTime.AutoSize = true;
-            this.checkTime.Location = new System.Drawing.Point(531, 261);
+            this.checkTime.Location = new System.Drawing.Point(319, 261);
             this.checkTime.Name = "checkTime";
             this.checkTime.Size = new System.Drawing.Size(88, 16);
             this.checkTime.TabIndex = 3;
@@ -123,7 +128,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReset.Location = new System.Drawing.Point(420, 283);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(105, 23);
@@ -134,7 +139,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemove.Location = new System.Drawing.Point(531, 283);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(105, 23);
@@ -145,7 +150,8 @@
             // 
             // progressBar
             // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.Location = new System.Drawing.Point(70, 283);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(339, 23);
@@ -162,11 +168,28 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "진행률 : ";
             // 
+            // OrginalData
+            // 
+            this.OrginalData.Text = "OrginalData";
+            this.OrginalData.Width = 0;
+            // 
+            // btnRecovery
+            // 
+            this.btnRecovery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRecovery.Location = new System.Drawing.Point(531, 258);
+            this.btnRecovery.Name = "btnRecovery";
+            this.btnRecovery.Size = new System.Drawing.Size(105, 21);
+            this.btnRecovery.TabIndex = 8;
+            this.btnRecovery.Text = "복구하기";
+            this.btnRecovery.UseVisualStyleBackColor = true;
+            this.btnRecovery.Click += new System.EventHandler(this.btnRecovery_Click);
+            // 
             // FileTimeChanger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 316);
+            this.ClientSize = new System.Drawing.Size(644, 316);
+            this.Controls.Add(this.btnRecovery);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.btnRemove);
@@ -176,8 +199,7 @@
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.listView);
             this.Name = "FileTimeChanger";
-            this.Text = "파일날짜 일괄변경";
-            this.Load += new System.EventHandler(this.FileTimeChanger_Load);
+            this.Text = "파일날짜 일괄변경 v0.2 (Gungume.com)";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,6 +220,8 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ColumnHeader OrginalData;
+        private System.Windows.Forms.Button btnRecovery;
     }
 }
 

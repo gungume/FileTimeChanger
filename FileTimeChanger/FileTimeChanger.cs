@@ -27,7 +27,8 @@ namespace FileTimeChanger
                 if (File.GetAttributes(fileName).ToString().StartsWith("Archive") == true)
                 {
                     FileInfo fi = new FileInfo(fileName);
-                    ListViewItem item = new ListViewItem(new string[] { fi.FullName, fi.Name, fi.CreationTime.ToString(), fi.LastWriteTime.ToString(), fi.LastAccessTime.ToString() });
+                    ListViewItem item = new ListViewItem(new string[] { fi.FullName, string.Format("{0}!{1}!{2}", fi.CreationTime.ToString(), fi.LastWriteTime.ToString(), fi.LastAccessTime.ToString()), 
+                                                                        fi.Name, fi.CreationTime.ToString(), fi.LastWriteTime.ToString(), fi.LastAccessTime.ToString() });
                     item.Name = fi.FullName;
 
                     if (!listView.Items.ContainsKey(fi.FullName))
@@ -56,13 +57,6 @@ namespace FileTimeChanger
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            
-            string FullFilePath = string.Empty;
-            //string FileName = string.Empty;
-            string Created = string.Empty;
-            string Modified = string.Empty;
-            string Accessed = string.Empty;
-
             progressBar.Value = 0;
             progressBar.Minimum = 0;
             progressBar.Maximum = listView.Items.Count;
@@ -70,13 +64,7 @@ namespace FileTimeChanger
 
             foreach (ListViewItem item in listView.Items)
             {
-                FullFilePath = item.SubItems[0].Text;
-                //FileName = item.SubItems[1].Text;
-                Created = item.SubItems[2].Text;
-                Modified = item.SubItems[3].Text;
-                Accessed = item.SubItems[4].Text;
-
-                FileInfo fi = new FileInfo(FullFilePath);
+                FileInfo fi = new FileInfo(item.SubItems[0].Text);
 
                 if (checkTime.Checked)
                 {
@@ -91,13 +79,39 @@ namespace FileTimeChanger
                     fi.LastAccessTime = dateTimePicker.Value;
                 }
 
-                item.SubItems[2].Text = fi.CreationTime.ToString();
-                item.SubItems[3].Text = fi.LastWriteTime.ToString();
-                item.SubItems[4].Text = fi.LastAccessTime.ToString();
+                item.SubItems[3].Text = fi.CreationTime.ToString();
+                item.SubItems[4].Text = fi.LastWriteTime.ToString();
+                item.SubItems[5].Text = fi.LastAccessTime.ToString();
 
                 progressBar.PerformStep();
             }
             progressBar.Value = progressBar.Maximum;
+        }
+
+        private void btnRecovery_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            progressBar.Minimum = 0;
+            progressBar.Maximum = listView.Items.Count;
+            progressBar.Step = 1;
+
+            foreach (ListViewItem item in listView.Items)
+            {
+                FileInfo fi = new FileInfo(item.SubItems[0].Text);
+                string[] Times = item.SubItems[1].Text.Split('!');
+
+                fi.CreationTime = DateTime.Parse(Times[0]);
+                fi.LastWriteTime = DateTime.Parse(Times[1]);
+                fi.LastAccessTime = DateTime.Parse(Times[2]);
+
+                item.SubItems[3].Text = fi.CreationTime.ToString();
+                item.SubItems[4].Text = fi.LastWriteTime.ToString();
+                item.SubItems[5].Text = fi.LastAccessTime.ToString();
+
+                progressBar.PerformStep();
+            }
+            progressBar.Value = progressBar.Maximum;
+
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -110,25 +124,10 @@ namespace FileTimeChanger
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            ListViewItemsRemove();
-        }
-
-        private void ListViewItemsRemove()
-        {
             foreach (ListViewItem item in listView.SelectedItems)
             {
                 listView.Items.Remove(item);
             }
-        }
-
-        private void FileTimeChanger_Load(object sender, EventArgs e)
-        {
-            this.Size = new Size(660, 350);
-            this.MaximumSize = new Size(660, Screen.PrimaryScreen.WorkingArea.Size.Height);
-            this.MinimumSize = new Size(660, 350);
-
-            listView.Size = new Size(625, 230);
-            listView.Location = new Point(10, 10);
         }
     }
 }
